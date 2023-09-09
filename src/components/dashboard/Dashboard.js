@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import Calendar from 'react-calendar';
 
 const Dashboard = () => {
 
@@ -22,6 +23,14 @@ useEffect(()=>{
     return (
         <div>
             <h1>Dashboard</h1>
+
+            <div className='d-flex justify-content-center p-5' >
+            <Calendar  />
+            </div>
+
+     
+            
+     
 
             <h5>Meal Rate :{mealData.milRate}</h5>
             <h5>Grand Meal :{mealData.totalMeal}</h5>

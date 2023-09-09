@@ -6,6 +6,7 @@ import "../src/Assests/css/animate.min.css"
 import "../src/Assests/css/style.css"
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import 'react-calendar/dist/Calendar.css';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
