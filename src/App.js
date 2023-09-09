@@ -1,23 +1,36 @@
-import logo from './logo.svg';
+
 import './App.css';
+import { Toaster } from 'react-hot-toast';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import DashboardPage from './pages/DashboardPage';
+import AllMemberPage from './pages/AllMemberPage';
+import SearchPage from './pages/SearchPage';
+import RegistrationPage from './pages/RegistrationPage';
+import NotFound from './pages/NotFound';
+import RegularMealPage from './pages/RegularMealPage';
+
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+       
+          <Toaster />     
+          <BrowserRouter>
+          <Routes>
+            <Route exact path='/' element={<DashboardPage></DashboardPage>}></Route>
+            <Route exact path='/allMemberPage' element={<AllMemberPage></AllMemberPage>}></Route>
+            <Route exact path='/searchPage' element={<SearchPage></SearchPage>}></Route>
+            <Route exact path='/registration' element={<RegistrationPage></RegistrationPage>}></Route>
+            <Route exact path='/regularMeal' element={<RegularMealPage></RegularMealPage >}></Route>
+           
+            <Route exact path='*' element={<NotFound></NotFound>}></Route>
+          </Routes>
+      
+          </BrowserRouter>
+          <ToastContainer />
+  
     </div>
   );
 }
