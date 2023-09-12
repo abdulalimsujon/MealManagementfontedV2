@@ -18,7 +18,4 @@ export function getAllMember(){
         })
 
      
-    
-      
-  
 }

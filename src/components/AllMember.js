@@ -13,24 +13,60 @@ const AllMember = (props) => {
 
   
   const [members,Setmembers] = useState([])
- 
-  const [show, setShow] = useState(false);
-  let mealRef,balanceRef = useRef()
 
-  const handleClose = async() =>{
+ const [id,setId] = useState(null)
+  const [show, setShow] = useState(false);
+
+  let mealRef,balanceRef = useRef();
+  
+
+  const handleClose = () =>{
+
+    setShow(false);
+
+  } 
+  const handleSubmit = () =>{
 
 
     const meal = mealRef.value;
     const balance = balanceRef.value;
+    let URL="http://localhost:5000/api/v1/regularMeal";
 
-    console.log(meal)
-    console.log(balance)
+    const postBody={
+      memberId:id,
+      meal:meal,
+      balance:balance,
+        
+    }
+   
+
+    axios.post(URL,postBody).then((res)=>{      
+              if(res.status===200){                         
+              }
+ 
+          })
+   
 
 
     setShow(false);
 
   } 
-  const handleShow = () => setShow(true);
+
+  
+  const handleShow = (id) => {
+
+   
+    
+
+    setId(id)
+
+   
+  
+    setShow(true);
+  }
+  
+  
+  
 
 
   
@@ -111,7 +147,7 @@ const AllMember = (props) => {
                         <th scope="row">{i}</th>
                         <td>{member.name}</td>
                         <td className='m-2'>
-                        <Button className='text-dark btn-primary' variant="primary" onClick={handleShow}>
+                        <Button className='text-dark btn btn-info' variant="primary" onClick={()=>handleShow(member._id)}>
                            set
                         </Button>
                        
@@ -155,7 +191,7 @@ const AllMember = (props) => {
       <Button variant="primary" onClick={handleClose}>
         Close
       </Button>
-      <Button variant="primary" onClick={handleClose}>
+      <Button variant="primary" onClick={handleSubmit}>
         submit
       </Button>
     </Modal.Footer>

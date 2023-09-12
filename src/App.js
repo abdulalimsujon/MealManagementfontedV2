@@ -10,6 +10,7 @@ import SearchPage from './pages/SearchPage';
 import RegistrationPage from './pages/RegistrationPage';
 import NotFound from './pages/NotFound';
 import RegularMealPage from './pages/RegularMealPage';
+import RegularCostPage from './pages/RegularCostPage';
 
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
             <Route exact path='/searchPage' element={<SearchPage></SearchPage>}></Route>
             <Route exact path='/registration' element={<RegistrationPage></RegistrationPage>}></Route>
             <Route exact path='/regularMeal' element={<RegularMealPage></RegularMealPage >}></Route>
+            <Route exact path='/regularCost' element={<RegularCostPage></RegularCostPage>}></Route>
            
             <Route exact path='*' element={<NotFound></NotFound>}></Route>
           </Routes>
