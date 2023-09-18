@@ -39,6 +39,10 @@ a:hover {
   box-shadow: none !important;
 }
 
+.circular{
+  width: 200px;
+  height: 200 px;
+}
 @import "sidebar.css";
 @import "progress.css";
 @import "dropdownmenu.css";

@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import Calendar from 'react-calendar';
 import toast from 'react-hot-toast';
+import CircularProgress from './CircularProgress';
 
 const Dashboard = () => {
 
@@ -21,7 +22,7 @@ axios.get(urL).then((res)=>{
 })
 
 
-          console.log("dshakfjhefaeh",grantTotalCost)
+        //   console.log("dshakfjhefaeh",grantTotalCost)
    
     
    
@@ -35,23 +36,38 @@ axios.get(urL).then((res)=>{
    
 },[grantTotalCost])
 
-console.log(mealData)
+console.log(mealData.milRate)
+
     return (
-        <div>
-            <h1>Dashboard</h1>
+        <div class='container'>
+              <h1>Dashboard</h1>
+            <div className="row my-3">
+               
+                <div class='col-lg-6 d-flex justify-content-center align-items-center'>
+                <CircularProgress rate={mealData.milRate}></CircularProgress>
+                </div>
 
-            <div className='d-flex justify-content-center p-5' >
-            <Calendar  />
+               <div className="col-md-6 d-flex justify-content-center align-items-center">
+
+               <Calendar  />
+
+               </div>
             </div>
+            <div className="row">
+                <div className="col-md-12 col-md-12 p-5">
+                <h3 className='text-primary'>Meal Information</h3>
+                   <h5>Grant Total Balance :{mealData.grandBalace}</h5>
+                   <h5>Meal Rate :{mealData.milRate}</h5>
+                     <h5>Grand Meal :{mealData.totalMeal}</h5>
+                    <h5>Grand Exist Balance :{mealData.grantExistBalance}</h5>
 
-     
-            
-     
 
-            <h5>Meal Rate :{mealData.milRate}</h5>
-            <h5>Grand Meal :{mealData.totalMeal}</h5>
-            <h5>Grand Exist Balance :{mealData.grantExistBalance}</h5>
-          
+                </div>
+
+
+            </div>
+           
+           
         </div>
     );
 };
