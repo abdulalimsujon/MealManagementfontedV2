@@ -1,7 +1,42 @@
-import React from 'react';
+import axios from 'axios';
+import React, { useRef } from 'react';
+import toast from 'react-hot-toast';
 import { Link } from "react-router-dom"
 
 const Register = () => {
+
+    let nameRef ,emailRef,passwordRef,mobileRef,addressRef= useRef();
+
+   
+
+
+    const onSubmit = async(req,res)=>{
+        const name=nameRef.value
+        const email=emailRef.value
+       const  password=passwordRef.value
+       const mobile = mobileRef.value
+        const address=addressRef.value
+        
+    const reqBody = {
+        name,
+        email,
+        password,
+        mobile,
+        address
+    }
+
+    const url = "http://localhost:5000/api/v1/register";
+
+    axios.post(url,reqBody).then((res)=>{      
+        if(res.status===200){  
+            toast.success('Successfully Registered');                 
+        }
+
+    })
+
+
+    }
+   
     return (
         
 
@@ -20,27 +55,27 @@ const Register = () => {
                     <div className="row  p-0">
 
                     <label>Name</label>
-                        <input  className="form-control animated fadeInUp" type="text"></input>
+                        <input ref={(input)=>nameRef=input} className="form-control animated fadeInUp" type="text"></input>
                         <hr/>
                         
                         <label class=" ">Email Address</label>
-                        <input className='form-control animated fadeInUp' type="email"></input>
+                        <input ref={(input)=>emailRef=input} className='form-control animated fadeInUp' type="email"></input>
                         
                       
                         <label>Password</label>
-                        <input  className="form-control animated fadeInUp" type="password"></input>
+                        <input ref={(input)=>passwordRef=input}  className="form-control animated fadeInUp" type="password"></input>
                         <hr/>
                         <label>Mobile Number</label>
-                        <input  className="form-control animated fadeInUp" type="text"></input>
+                        <input ref={(input)=>mobileRef=input}  className="form-control animated fadeInUp" type="text"></input>
                         <hr/>
                         <label>Address</label>
-                        <input  className="form-control animated fadeInUp" type="text"></input>
+                        <input ref={(input)=>addressRef=input}   className="form-control animated fadeInUp" type="text"></input>
                         <hr/>
                         <label>photo</label>
                         <input  className="form-control animated fadeInUp" type="text"></input>
                         <hr/>
 
-                        <button className='form-control btn-primary animated fadeInUp' >Next</button>
+                        <button onClick = {onSubmit} className='form-control btn-primary animated fadeInUp' >Next</button>
 
                       
                         <div className="text-center w-100">

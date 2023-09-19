@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { Fragment, useRef } from 'react';
 import { Link } from 'react-router-dom';
+import { setMemberDetails } from '../helper/SessionHelper';
 
 const SignIn = () => {
     let emailRef,passwordRef = useRef();
@@ -19,6 +20,7 @@ const SignIn = () => {
             let url = "http://localhost:5000/api/v1/signin";
     
             const {data} = await axios.get(url,reqBody);
+            setMemberDetails(data)
 
             console.log(data)
 
