@@ -3,6 +3,8 @@ import React, { useEffect, useRef, useState } from 'react';
 
 import { Button, Modal, Table } from 'react-bootstrap';
 import { toast } from 'react-hot-toast';
+import { SweetAlert } from '../helper/SweetAlert';
+import { removeSession } from '../helper/SessionHelper';
 
 
 
@@ -52,6 +54,22 @@ const AllMember = (props) => {
 
   } 
 
+const onDelete=(id)=>{
+  SweetAlert(id).then((res)=>{
+
+    
+    if(res===true){
+      
+      getData();
+
+
+
+    }
+  })
+}
+
+
+
   
   const handleShow = (id) => {
 
@@ -73,7 +91,7 @@ const AllMember = (props) => {
     useEffect(()=>{
     
      
-      getData()
+      getData();
       
   
      
@@ -102,23 +120,7 @@ const AllMember = (props) => {
     }
 
     
-    
-    const DeleteFunction = async(id)=>{
-
-        let URL= `http://localhost:5000/api/v1/deleteMember/${id}`
-        
-
-       await axios.delete(URL).then((res)=>{
-
-        console.log(res.status)
-         if(res.status===200){
-          getData()
-            toast.success("successfully deleted")
-         
-
-         }
-       })
-    }
+  
     return (
         <div>
             <h1>All the members</h1>
@@ -154,7 +156,7 @@ const AllMember = (props) => {
                         </td>
                         <td>{member.email}</td>
                         <td>{member.mobile}</td>
-                        <td><Button onClick= {()=>DeleteFunction(member._id)} className="text-dark">Delete</Button></td>
+                        <td><Button onClick= {()=>onDelete(member._id)} className="text-dark">Delete</Button></td>
                       </tr>                       
                       
                      )

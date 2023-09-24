@@ -1,14 +1,14 @@
 import axios from 'axios';
 import React, { useRef } from 'react';
 import toast from 'react-hot-toast';
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 
 const Register = () => {
 
     let nameRef ,emailRef,passwordRef,mobileRef,addressRef= useRef();
 
    
-
+   const navigate = useNavigate();
 
     const onSubmit = async(req,res)=>{
         const name=nameRef.value
@@ -27,9 +27,14 @@ const Register = () => {
 
     const url = "http://localhost:5000/api/v1/register";
 
-    axios.post(url,reqBody).then((res)=>{      
-        if(res.status===200){  
-            toast.success('Successfully Registered');                 
+    axios.post(url,reqBody).then((res)=>{    
+        
+        if(res.data.error){
+            toast.error(res.data.error)
+        }
+        if(res.data.status==="success"){  
+            toast.success('Successfully Registered');
+            window.location.href='/'               
         }
 
     })
@@ -79,7 +84,7 @@ const Register = () => {
 
                       
                         <div className="text-center w-100">
-                        <Link className='text-center animated fadeInUp' >Login</Link>
+                        <Link onClick={navigate('/')} className='text-center animated fadeInUp' >Login</Link>
                       
 
 

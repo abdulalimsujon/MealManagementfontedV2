@@ -12,33 +12,61 @@ import NotFound from './pages/NotFound';
 import RegularMealPage from './pages/RegularMealPage';
 import RegularCostPage from './pages/RegularCostPage';
 import SignIn from './components/SignIn';
+import { getToken } from './helper/SessionHelper';
 
 
 
 function App() {
-  return (
-    <div className="App">
-       
-          <Toaster />     
-          <BrowserRouter>
-          <Routes>
-            <Route exact path='/' element={<DashboardPage></DashboardPage>}></Route>
-            <Route exact path='/allMemberPage' element={<AllMemberPage></AllMemberPage>}></Route>
-            <Route exact path='/searchPage' element={<SearchPage></SearchPage>}></Route>
-            <Route exact path='/register' element={<RegistrationPage></RegistrationPage>}></Route>
-            <Route exact path='/regularMeal' element={<RegularMealPage></RegularMealPage >}></Route>
-            <Route exact path='/regularCost' element={<RegularCostPage></RegularCostPage>}></Route>
-            <Route exact path='/signIn' element={<SignIn></SignIn>}></Route>
-           
-           
-            <Route exact path='*' element={<NotFound></NotFound>}></Route>
-          </Routes>
-      
-          </BrowserRouter>
+
+  const token = getToken();
+
+       if(!token){
+
+        return(
+          <div className="App">
+             <Toaster />     
+        <BrowserRouter>
+        <Routes>
+
+                
+                <Route exact path='/register' element={<RegistrationPage></RegistrationPage>}></Route>
+                <Route exact path='/dashboard' element={<DashboardPage></DashboardPage>}></Route>
+                <Route exact path='/' element={<SignIn></SignIn>}></Route>
+                <Route exact path='*' element={<NotFound></NotFound>}></Route>
+
+        </Routes>
+
+        
+        </BrowserRouter>
           <ToastContainer />
+
+          </div>
+        )
+       
+
+       }else{
+        return (
+          <div className="App">            
+                <Toaster />     
+                <BrowserRouter>
+                <Routes>
+                  <Route exact path='/' element={<DashboardPage></DashboardPage>}></Route>
+                  <Route exact path='/mealInformation' element={<DashboardPage></DashboardPage>}></Route>
+                  <Route exact path='/allMemberPage' element={<AllMemberPage></AllMemberPage>}></Route>
+                  <Route exact path='/searchPage' element={<SearchPage></SearchPage>}></Route>           
+                  <Route exact path='/regularMeal' element={<RegularMealPage></RegularMealPage >}></Route>
+                  <Route exact path='/regularCost' element={<RegularCostPage></RegularCostPage>}></Route>          
+                  <Route exact path='*' element={<NotFound></NotFound>}></Route>
+                </Routes>
+            
+                </BrowserRouter>
+                <ToastContainer />
+        
+          </div>
+        );
+
+       }
   
-    </div>
-  );
 }
 
 export default App;

@@ -44,5 +44,5 @@ a:hover {
   height: 200 px;
 }
 @import "sidebar.css";
-@import "progress.css";
+
 @import "dropdownmenu.css";

@@ -5,10 +5,12 @@ import {AiOutlineCheckCircle, AiOutlineEdit, AiOutlineLogout, AiOutlineMenuUnfol
 import {CiSearch,CiDatabase} from "react-icons/ci";
 import {SiDailymotion} from "react-icons/si";
 import React, { Fragment, useRef } from 'react';
+import { getMemberDetails, removeSession } from "../helper/SessionHelper";
 
 const MasterLayout = (props) => {
 
     let contentRef,sideNavRef=useRef();
+    const member= getMemberDetails();
 
     const MenuBarClickHandler = () => {
         let sideNav = sideNavRef;
@@ -28,14 +30,23 @@ const MasterLayout = (props) => {
             content.classList.add("content");
         }
     };
+
+    const logout =()=>{
+        removeSession();
+    }
+
+
+
     return (
         <Fragment>
 
 <Navbar  className="fixed-top px-0 shadow-sm ">
                 <Container fluid={true}>
                     <Navbar.Brand >
-                        <a className="icon-nav m-0 h5" onClick={MenuBarClickHandler} ><AiOutlineMenuUnfold/></a>
-                        <img className="nav-logo mx-2" src="" alt="logo"/>
+                        <a className="icon-nav m-0 h5" onClick={MenuBarClickHandler} ><AiOutlineMenuUnfold/></a> 
+                        {member.email}
+                       
+
                     </Navbar.Brand>
 
 
@@ -55,7 +66,7 @@ const MasterLayout = (props) => {
                                 </NavLink>
                                 <a className="side-bar-item">
                                     <AiOutlineLogout className="side-bar-item-icon" />
-                                    <span className="side-bar-item-caption">Logout</span>
+                                    <span onClick={logout} className="side-bar-item-caption">Logout</span>
                                 </a>
                             </div>
                         </div>
@@ -86,6 +97,10 @@ const MasterLayout = (props) => {
 <NavLink className={(navData) => navData.isActive ? "side-bar-item-active side-bar-item mt-2" : "side-bar-item mt-2" } to="/regularMeal" >
     <SiDailymotion className="side-bar-item-icon" />
     <span className="side-bar-item-caption">Regular Meal</span>
+</NavLink>
+<NavLink className={(navData) => navData.isActive ? "side-bar-item-active side-bar-item mt-2" : "side-bar-item mt-2" } to="/mealInformation" >
+    <SiDailymotion className="side-bar-item-icon" />
+    <span className="side-bar-item-caption">Meal Information</span>
 </NavLink>
 <NavLink className={(navData) => navData.isActive ? "side-bar-item-active side-bar-item mt-2" : "side-bar-item mt-2" } to="/regularCost" >
     <SiDailymotion className="side-bar-item-icon" />

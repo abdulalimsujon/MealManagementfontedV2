@@ -1,12 +1,13 @@
 import axios from 'axios';
 import React, { Fragment, useRef } from 'react';
-import { Link } from 'react-router-dom';
-import { setMemberDetails } from '../helper/SessionHelper';
+import { Link, useNavigate } from 'react-router-dom';
+import { setMemberDetails, setToken } from '../helper/SessionHelper';
+import toast from 'react-hot-toast';
 
 const SignIn = () => {
     let emailRef,passwordRef = useRef();
 
-   
+   const navigate = useNavigate();
 
     const OnSignIn =async(req,res)=>{
   
@@ -19,10 +20,23 @@ const SignIn = () => {
         
             let url = "http://localhost:5000/api/v1/signin";
     
-            const {data} = await axios.get(url,reqBody);
-            setMemberDetails(data)
+            const {data} = await axios.post(url,reqBody);
 
-            console.log(data)
+            if(data.error){
+                toast.error(data.error)
+            }
+
+            if(data.status==="success"){
+
+              window.location.href='/';
+
+            }
+
+             
+          setMemberDetails(data.data);
+          setToken(data.token)
+           
+
 
         }catch(error){
 

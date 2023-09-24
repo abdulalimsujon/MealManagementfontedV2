@@ -6,7 +6,7 @@ const CircularProgress = (props) => {
   
 const pp =props.rate;
   return (
-    <div style={{ width: 200, height: 200 }}>
+    <div style={{ width: 150, height: 150 }}>
       
       <CircularProgressbar
   value={pp}
