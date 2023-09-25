@@ -9,10 +9,12 @@ import AllMemberPage from './pages/AllMemberPage';
 import SearchPage from './pages/SearchPage';
 import RegistrationPage from './pages/RegistrationPage';
 import NotFound from './pages/NotFound';
-import RegularMealPage from './pages/RegularMealPage';
+
 import RegularCostPage from './pages/RegularCostPage';
 import SignIn from './components/SignIn';
 import { getToken } from './helper/SessionHelper';
+
+import MealInformationPage from './pages/MealInformationPage';
 
 
 
@@ -51,10 +53,9 @@ function App() {
                 <BrowserRouter>
                 <Routes>
                   <Route exact path='/' element={<DashboardPage></DashboardPage>}></Route>
-                  <Route exact path='/mealInformation' element={<DashboardPage></DashboardPage>}></Route>
+                  <Route exact path='/mealInformation' element={<MealInformationPage></MealInformationPage>}></Route>
                   <Route exact path='/allMemberPage' element={<AllMemberPage></AllMemberPage>}></Route>
-                  <Route exact path='/searchPage' element={<SearchPage></SearchPage>}></Route>           
-                  <Route exact path='/regularMeal' element={<RegularMealPage></RegularMealPage >}></Route>
+                  <Route exact path='/searchPage' element={<SearchPage></SearchPage>}></Route>          
                   <Route exact path='/regularCost' element={<RegularCostPage></RegularCostPage>}></Route>          
                   <Route exact path='*' element={<NotFound></NotFound>}></Route>
                 </Routes>

@@ -2,6 +2,7 @@ import React from 'react';
 import MasterLayout from '../MasterLayout/MasterLayout';
 import MealInformation from '../components/MealInformation';
 
+
 const MealInformationPage = () => {
 
     // current meal of a member
@@ -12,7 +13,8 @@ const MealInformationPage = () => {
     return (
         <div>
                 <MasterLayout>
-                <MealInformation></MealInformation>
+                    <MealInformation></MealInformation>
+                
             </MasterLayout>
         </div>
     );

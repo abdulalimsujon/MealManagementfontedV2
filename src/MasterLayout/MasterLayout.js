@@ -94,10 +94,7 @@ const MasterLayout = (props) => {
     <span className="side-bar-item-caption">Search</span>
 </NavLink>
 
-<NavLink className={(navData) => navData.isActive ? "side-bar-item-active side-bar-item mt-2" : "side-bar-item mt-2" } to="/regularMeal" >
-    <SiDailymotion className="side-bar-item-icon" />
-    <span className="side-bar-item-caption">Regular Meal</span>
-</NavLink>
+
 <NavLink className={(navData) => navData.isActive ? "side-bar-item-active side-bar-item mt-2" : "side-bar-item mt-2" } to="/mealInformation" >
     <SiDailymotion className="side-bar-item-icon" />
     <span className="side-bar-item-caption">Meal Information</span>

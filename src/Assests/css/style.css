@@ -43,6 +43,10 @@ a:hover {
   width: 200px;
   height: 200 px;
 }
+
+.input_table{
+  border: 1px solid black;
+}
 @import "sidebar.css";
 
 @import "dropdownmenu.css";

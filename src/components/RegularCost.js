@@ -12,6 +12,8 @@ const RegularCost = () => {
     setFields([...fields, {  }]);
   };
 
+ 
+
   const handleRemoveField = (index) => {
     const newFields = [...fields];
     newFields.splice(index, 1);
@@ -26,6 +28,8 @@ const RegularCost = () => {
 
 
   };
+
+  
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -51,52 +55,14 @@ const RegularCost = () => {
       
         })
 
-      
-
-     
-
   
   };
     return (
         <div>
            <h4 className='text-center p-3'>Market list</h4>
          
-       <Table striped bordered hover>
-      
-      <thead>
-        <tr>
-          
-          <th>product</th>
-          <th>price</th>
-          
-          
-        </tr>
-        </thead>
-        <tbody>
-       {
-        fields.map((field)=>{
-            return(
-
-                <tr>
-                <td>{field.name}</td>
-                <td>{field.value}</td>
-                
-              </tr>
-
-              
-     
-            )
-        })
-       }
-       <tr>
-               
-              </tr>
-           
-        </tbody>
-    </Table>
-
-    <h3 className='p-3'>Add Regular Cost</h3>
-       <form onSubmit={handleSubmit}>
+    <h3 className='p-3'>Add Regular Market</h3>
+       <form onSubmit={handleSubmit} className='table_style'>
         {fields.map((field, index) => (
           <div key={index}>
             <input
