@@ -4,13 +4,40 @@ import {AiOutlineCheckCircle, AiOutlineEdit, AiOutlineLogout, AiOutlineMenuUnfol
 
 import {CiSearch,CiDatabase} from "react-icons/ci";
 import {SiDailymotion} from "react-icons/si";
-import React, { Fragment, useRef } from 'react';
+import React, { Fragment, useEffect, useRef, useState } from 'react';
 import { getMemberDetails, removeSession } from "../helper/SessionHelper";
+import axios from "axios";
 
 const MasterLayout = (props) => {
 
     let contentRef,sideNavRef=useRef();
     const member= getMemberDetails();
+    const [profileData,setProfileData] = useState([]);
+
+    const img = profileData.photo ||  member.photo
+
+    useEffect(()=>{
+
+        let URL= `http://localhost:5000/api/v1/getProfileData/${member.email}`;
+
+  
+        axios.get(URL).then((res)=>{
+              
+            
+              if(res.status===200){
+                setProfileData(res.data.data) 
+              
+                
+                  
+              }
+  
+              
+        
+          })
+        
+    },[])
+
+
 
     const MenuBarClickHandler = () => {
         let sideNav = sideNavRef;
@@ -36,7 +63,6 @@ const MasterLayout = (props) => {
     }
 
 
-
     return (
         <Fragment>
 
@@ -53,14 +79,15 @@ const MasterLayout = (props) => {
                     
                     <div className="float-right h-auto d-flex">
                         <div className="user-dropdown">
-                            <img className="icon-nav-img icon-nav" src="" alt="no"/>
+                        
+                            <img className="icon-nav-img icon-nav" src={img } alt="no"/>
                             <div className="user-dropdown-content ">
                                 <div className="mt-4 text-center">
                                     <img className="icon-nav-img" src="" alt="no"/>
                                   
                                     <hr className="user-dropdown-divider  p-0"/>
                                 </div>
-                                <NavLink to="/profile" className="side-bar-item">
+                                <NavLink to="/ProfilePage" className="side-bar-item">
                                     <AiOutlineUser className="side-bar-item-icon" />
                                     <span className="side-bar-item-caption">Profile</span>
                                 </NavLink>

@@ -15,6 +15,7 @@ import SignIn from './components/SignIn';
 import { getToken } from './helper/SessionHelper';
 
 import MealInformationPage from './pages/MealInformationPage';
+import ProfilePage from './pages/ProfilePage';
 
 
 
@@ -53,6 +54,7 @@ function App() {
                 <BrowserRouter>
                 <Routes>
                   <Route exact path='/' element={<DashboardPage></DashboardPage>}></Route>
+                  <Route exact path='/ProfilePage' element={<ProfilePage></ProfilePage>}></Route>
                   <Route exact path='/mealInformation' element={<MealInformationPage></MealInformationPage>}></Route>
                   <Route exact path='/allMemberPage' element={<AllMemberPage></AllMemberPage>}></Route>
                   <Route exact path='/searchPage' element={<SearchPage></SearchPage>}></Route>          

@@ -2,20 +2,27 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { Table } from 'react-bootstrap';
 
+
 const MealInformation = () => {
 
 
     const [MealInformation,setMealInformation] = useState([])
 
+    const mealRate = localStorage.getItem('mealRate')
+
+
     useEffect(()=>{
 
-        let urL="http://localhost:5000/api/v1/mealInformation";
+      //-------------------->get all information about meal ------------->
+
+        let urL= `http://localhost:5000/api/v1/mealInformation/${mealRate}`;
 
         axios.get(urL).then((res)=>{
             
             setMealInformation(res.data.EachPersonMealInfo)
         })
-
+   
+    
 
 
     },[])
@@ -38,6 +45,7 @@ const MealInformation = () => {
           <th>Email</th>
           <th>Total Meal</th>
           <th>Total balance</th>
+          <th>Exist balance</th>
         </tr>
       </thead>
       <tbody>
@@ -50,6 +58,7 @@ const MealInformation = () => {
                 <td>{data.email}</td>
                 <td>{data?.totalMeal}</td>
                 <td>{data?.totalBalance}</td>
+                <td>{data?.ExistBalance}</td>
               </tr>
 
              

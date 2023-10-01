@@ -2,9 +2,11 @@ import axios from 'axios';
 import React, { useEffect, useRef, useState } from 'react';
 
 import { Button, Modal, Table } from 'react-bootstrap';
-import { toast } from 'react-hot-toast';
 import { SweetAlert } from '../helper/SweetAlert';
-import { removeSession } from '../helper/SessionHelper';
+import { IsAdmin } from '../helper/SessionHelper';
+import { addBalance, addMeal } from '../redux/stateSlice/mealSlice';
+import { useSelector } from 'react-redux';
+import store from '../redux/store';
 
 
 
@@ -18,20 +20,37 @@ const AllMember = (props) => {
 
  const [id,setId] = useState(null)
   const [show, setShow] = useState(false);
+  const [admin,setAdmin] = useState(0);
+
+
+
 
   let mealRef,balanceRef = useRef();
-  
+
 
   const handleClose = () =>{
 
     setShow(false);
 
   } 
+  
+
+  const meal = useSelector((state)=>state.mealInfo.meal);
+  const balance = useSelector((state)=>state.mealInfo.balance);
+
+  console.log(meal)
+
+
   const handleSubmit = () =>{
 
 
     const meal = mealRef.value;
     const balance = balanceRef.value;
+
+    store.dispatch(addMeal(meal))
+    store.dispatch(addBalance(balance))
+   
+    
     let URL="http://localhost:5000/api/v1/regularMeal";
 
     const postBody={
@@ -42,14 +61,12 @@ const AllMember = (props) => {
     }
    
 
-    axios.post(URL,postBody).then((res)=>{      
+   axios.post(URL,postBody).then((res)=>{      
               if(res.status===200){                         
               }
  
           })
    
-
-
     setShow(false);
 
   } 
@@ -69,35 +86,25 @@ const onDelete=(id)=>{
 }
 
 
-
-  
   const handleShow = (id) => {
 
-   
-    
-
     setId(id)
-
-   
-  
     setShow(true);
   }
   
-  
-  
 
-
+  
   
     useEffect(()=>{
     
-     
       getData();
+      setAdmin(IsAdmin())
       
-  
-     
     },[])
 
     
+
+
 
 
      function getData() {
@@ -108,6 +115,7 @@ const onDelete=(id)=>{
           
             if(res.status===200){
               Setmembers(res.data.members)
+              
                 
             }
 
@@ -118,8 +126,10 @@ const onDelete=(id)=>{
      
       
     }
+  
+   
+ 
 
-    
   
     return (
         <div>
@@ -130,12 +140,18 @@ const onDelete=(id)=>{
     <tr>
     <th scope="col">serial</th>
       <th scope="col">name</th>
-      <th scope="col">setMeal</th>
+    
       <th scope="col">email</th>
       <th scope="col">mobile</th>
-      <th className="text-danger" scope="col "> Action</th>
+      { 
+       admin  ? <th scope="col">setMeal</th> : ""
+     }
+
+      {
+
+      admin  ?  <th className="text-danger" scope="col "> Action</th>  : <h1></h1>
       
-   
+      }
     </tr>
   </thead>
 
@@ -148,15 +164,28 @@ const onDelete=(id)=>{
                    
                         <th scope="row">{i}</th>
                         <td>{member.name}</td>
-                        <td className='m-2'>
-                        <Button className='text-dark btn btn-info' variant="primary" onClick={()=>handleShow(member._id)}>
-                           set
-                        </Button>
-                       
-                        </td>
                         <td>{member.email}</td>
                         <td>{member.mobile}</td>
-                        <td><Button onClick= {()=>onDelete(member._id)} className="text-dark">Delete</Button></td>
+                        
+                       { 
+                           admin  ?  <td className='m-2'> <div><Button className='text-dark btn btn-info mx-2' variant="primary" onClick={()=>handleShow(member._id)}>set </Button> 
+                           
+                           </div>  </td> : <h1></h1>
+                       }
+                        
+                        
+                       
+                 
+                 {
+
+                   admin  ?  <td><Button onClick= {()=>onDelete(member._id)} className="text-dark">Delete</Button></td>  : <h1></h1>
+
+
+                 }
+
+
+
+                        
                       </tr>                       
                       
                      )
@@ -170,6 +199,11 @@ const onDelete=(id)=>{
             </Table>
 
             <>
+
+           
+
+   
+
 
 <Modal show={show} onHide={handleClose}>
     <Modal.Header closeButton>
@@ -198,11 +232,17 @@ const onDelete=(id)=>{
       </Button>
     </Modal.Footer>
   </Modal>
+
     </>
-  
+
+    
+
+
 
             
         </div>
+
+
     );
 };
 

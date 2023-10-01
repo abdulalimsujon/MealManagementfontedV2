@@ -1,11 +1,31 @@
 import axios from 'axios';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Table } from 'react-bootstrap';
 import toast from 'react-hot-toast';
 
 const RegularCost = () => {
+    
+
 
     const [fields, setFields] = useState([{  }]);
+
+   const [dailyCost,setDailyCost] = useState([])
+     
+
+
+
+    useEffect(()=>{
+
+
+      let urL="http://localhost:5000/api/v1/getMealCostDetail";
+
+          axios.get(urL).then((res)=>{
+            setDailyCost(res?.data?.data[0]?.items)
+          })
+   
+},[])
+
+
     
 
   const handleAddField = () => {
@@ -28,6 +48,9 @@ const RegularCost = () => {
 
 
   };
+   
+
+    
 
   
 
@@ -87,7 +110,37 @@ const RegularCost = () => {
         </button>
         <button type="submit">Submit</button>
       </form>
+
+      {/* {
+       
+      <div className='d-flex justify-content-center align-items-center p-3'>
+
+<div className="card " style={{width: 700}}>
+  <div class="card-body">
+  <h5 class="card-title">Today Market</h5>
+      <table class='table'>
+      <thead>
+    <tr>
     
+      <th scope="col">price</th>
+      <th scope="col">product</th>
+ 
+    </tr>
+  </thead>
+        <tr>
+          <td>{dailyCost[0]?.name}</td>
+            <td>{dailyCost[0]?.value}</td>
+        </tr>
+      </table>
+  </div>
+</div>
+
+        </div>
+
+   
+     
+      }
+     */}
   
       </div>
     );
