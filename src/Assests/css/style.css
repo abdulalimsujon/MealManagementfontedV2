@@ -47,6 +47,11 @@ a:hover {
 .input_table{
   border: 1px solid black;
 }
+
+.bg {
+  background-color:rgb(200, 210, 219);
+}
+
 @import "sidebar.css";
 
 @import "dropdownmenu.css";

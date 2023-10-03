@@ -10,7 +10,9 @@ const RegularCost = () => {
     const [fields, setFields] = useState([{  }]);
 
    const [dailyCost,setDailyCost] = useState([])
-     
+   const [active,setActive] = useState(0)
+
+     console.log(active)
 
 
 
@@ -20,13 +22,13 @@ const RegularCost = () => {
       let urL="http://localhost:5000/api/v1/getMealCostDetail";
 
           axios.get(urL).then((res)=>{
-            setDailyCost(res?.data?.data[0]?.items)
+            setDailyCost(res.data.data)
           })
    
 },[])
 
 
-    
+    console.log("###",fields)
 
   const handleAddField = () => {
     setFields([...fields, {  }]);
@@ -57,7 +59,7 @@ const RegularCost = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     // Handle form submission here (e.g., send data to the server)
-    console.log('Form data:', fields);
+    console.log('Form data:', fields.length);
 
     let URL="http://localhost:5000/api/v1/mealCostDetail";
 
@@ -86,6 +88,7 @@ const RegularCost = () => {
          
     <h3 className='p-3'>Add Regular Market</h3>
        <form onSubmit={handleSubmit} className='table_style'>
+
         {fields.map((field, index) => (
           <div key={index}>
             <input
@@ -108,10 +111,10 @@ const RegularCost = () => {
         <button type="button" onClick={handleAddField}>
           Add Field
         </button>
-        <button type="submit">Submit</button>
+        <button onClick={()=>setActive(1)}  type="submit">Submit</button>
       </form>
 
-      {/* {
+      {
        
       <div className='d-flex justify-content-center align-items-center p-3'>
 
@@ -127,10 +130,29 @@ const RegularCost = () => {
  
     </tr>
   </thead>
-        <tr>
-          <td>{dailyCost[0]?.name}</td>
-            <td>{dailyCost[0]?.value}</td>
-        </tr>
+        
+
+         {
+          dailyCost.map((p)=>{
+
+            return(
+              <tr>
+              
+               
+                <td>{p.name}</td> 
+                 <td>{p.value}</td>   
+               
+             </tr>
+              
+            )
+
+
+            
+          })
+         }
+         
+      
+    
       </table>
   </div>
 </div>
@@ -140,7 +162,7 @@ const RegularCost = () => {
    
      
       }
-     */}
+    
   
       </div>
     );

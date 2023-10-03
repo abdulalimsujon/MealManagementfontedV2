@@ -4,23 +4,23 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Button, Modal, Table } from 'react-bootstrap';
 import { SweetAlert } from '../helper/SweetAlert';
 import { IsAdmin } from '../helper/SessionHelper';
-import { addBalance, addMeal } from '../redux/stateSlice/mealSlice';
-import { useSelector } from 'react-redux';
-import store from '../redux/store';
-
-
+import toast from 'react-hot-toast';
 
 
 
 
 const AllMember = (props) => {
+  const day = new Date();
+
 
   
   const [members,Setmembers] = useState([])
 
  const [id,setId] = useState(null)
+//  const [data,setData] = ([])
   const [show, setShow] = useState(false);
   const [admin,setAdmin] = useState(0);
+ 
 
 
 
@@ -35,34 +35,46 @@ const AllMember = (props) => {
   } 
   
 
-  const meal = useSelector((state)=>state.mealInfo.meal);
-  const balance = useSelector((state)=>state.mealInfo.balance);
 
-  console.log(meal)
+  const handleSubmit =async(req,res) =>{
 
 
-  const handleSubmit = () =>{
+    /// get data by id and date for checking wether it is in database or not
+
+    let URL1="http://localhost:5000/api/v1/getMealInfoByDateAndId";
+
+    const postbody={
+      memberId:id,
+      date:parseInt(day.getDate()),
+
+        
+    }
+   
+
+   const {data }= await axios.get(URL1,postbody)
+
+   console.log(data)
 
 
     const meal = mealRef.value;
     const balance = balanceRef.value;
-
-    store.dispatch(addMeal(meal))
-    store.dispatch(addBalance(balance))
-   
-    
+ 
     let URL="http://localhost:5000/api/v1/regularMeal";
 
     const postBody={
       memberId:id,
       meal:meal,
       balance:balance,
+
         
     }
-   
+ 
 
-   axios.post(URL,postBody).then((res)=>{      
-              if(res.status===200){                         
+   await axios.post(URL,postBody).then((res)=>{      
+              if(res.status===200){  
+          
+              
+                toast.success('Successfully submitted')                      
               }
  
           })

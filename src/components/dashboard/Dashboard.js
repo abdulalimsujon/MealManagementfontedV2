@@ -15,11 +15,9 @@ const Dashboard = () => {
     const [memberMealCost,setMemberMealCost] = useState(0);
     const [MemberTotalMeal,setMemberTotalMeal ] = useState(0);
     const memberDetail= getMemberDetails();
-    const meal = useSelector((state)=>state.mealInfo.meal);
-    const balance = useSelector((state)=>state.mealInfo.balance);
 
-   console.log(meal)
-   console.log(balance)
+//    console.log(meal)
+//    console.log(balance)
 
 useEffect(()=>{
 
@@ -28,7 +26,7 @@ let urL="http://localhost:5000/api/v1/getMealCostDetail";
 
 axios.get(urL).then((res)=>{
     
-    SetTotalCost(res.data.regularMealCostTotal)
+    SetTotalCost(res.data.totalCost)
 })
   
     let URL=`http://localhost:5000/api/v1/mealRate/${grantTotalCost}`
@@ -66,14 +64,14 @@ axios.get(urL).then((res)=>{
               <h1>Dashboard</h1>
             <div className="row my-3">
                
-                <div class='col-lg-4 col-md-6 col-sm-12 d-flex justify-content-center align-items-center'>
+                <div class='col-lg-4 col-md-6 col-sm-12 d-flex justify-content-center align-items-center bg'>
                 <CircularProgress rate={mealData.milRate}></CircularProgress>
 
                
 
                 </div>
 
-                <div className="col-lg-4 col-md-6 col-sm-12 d-flex justify-content-center align-items-center">
+                <div className="col-lg-4 col-md-6 col-sm-12 d-flex justify-content-center align-items-center bg">
                 <ul className='ml-3' style={{ listStyleType: 'square' }}>
                 <li>Grant Total Balance :{mealData.grandBalace}</li>
                 <li>Meal Rate :{mealData.milRate}</li>
