@@ -16,26 +16,26 @@ const MasterLayout = (props) => {
 
     const img = profileData.photo ||  member.photo
 
-    useEffect(()=>{
+    // useEffect(()=>{
 
-        let URL= `http://localhost:5000/api/v1/getProfileData/${member.email}`;
+    //     let URL= `http://localhost:5000/api/v1/getProfileData/${member.email}`;
 
   
-        axios.get(URL).then((res)=>{
+    //     axios.get(URL).then((res)=>{
               
             
-              if(res.status===200){
-                setProfileData(res.data.data) 
+    //           if(res.status===200){
+    //             setProfileData(res.data.data) 
               
                 
                   
-              }
+    //           }
   
               
         
-          })
+    //       })
         
-    },[])
+    // },[])
 
 
 

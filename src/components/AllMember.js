@@ -10,14 +10,16 @@ import toast from 'react-hot-toast';
 
 
 const AllMember = (props) => {
-  const day = new Date();
+  
 
+  const date = new Date();
+
+  let day =parseInt( date.getDate());
 
   
   const [members,Setmembers] = useState([])
 
  const [id,setId] = useState(null)
-//  const [data,setData] = ([])
   const [show, setShow] = useState(false);
   const [admin,setAdmin] = useState(0);
  
@@ -41,21 +43,23 @@ const AllMember = (props) => {
 
     /// get data by id and date for checking wether it is in database or not
 
-    let URL1="http://localhost:5000/api/v1/getMealInfoByDateAndId";
+  //   let URL1="http://localhost:5000/api/v1/getMealInfoByDateAndId";
 
-    const postbody={
-      memberId:id,
-      date:parseInt(day.getDate()),
+  //   const postbody={
+  //     memberId:id,
+  //     date: day
 
         
-    }
+  //   }
    
 
-   const {data }= await axios.get(URL1,postbody)
+  //  const {data }= await axios.get(URL1,postbody)
 
-   console.log(data)
+  //  console.log(data)
 
-
+   
+  // if(!data){
+    
     const meal = mealRef.value;
     const balance = balanceRef.value;
  
@@ -65,19 +69,27 @@ const AllMember = (props) => {
       memberId:id,
       meal:meal,
       balance:balance,
+      date:day
 
         
     }
  
 
    await axios.post(URL,postBody).then((res)=>{      
-              if(res.status===200){  
+              if(res.data.MealControl){  
           
               
                 toast.success('Successfully submitted')                      
               }
  
           })
+   
+
+  // }else{
+  //   toast.error('you cannot set data twice in a day') 
+
+  // }
+
    
     setShow(false);
 

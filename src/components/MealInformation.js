@@ -27,7 +27,7 @@ const MealInformation = () => {
 
     },[])
 
-    console.log(MealInformation)
+    //console.log(MealInformation)
 
 
 

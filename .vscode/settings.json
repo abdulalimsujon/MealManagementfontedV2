@@ -1,0 +1,11 @@
+{
+    "launch": {
+
+       
+        "configurations": [],
+        "compounds": [],
+        "javascript.suggest.alwaysAllWords":true,
+        "javascript.suggest.useCodeSnippetsOnMethodSuggest":true
+    },
+    
+}
