@@ -19,7 +19,7 @@ const AllMember = (props) => {
   
   const [members,Setmembers] = useState([])
 
- const [id,setId] = useState(null)
+ const [id,setId] = useState([])
   const [show, setShow] = useState(false);
   const [admin,setAdmin] = useState(0);
  
@@ -38,63 +38,35 @@ const AllMember = (props) => {
   
 
 
-  const handleSubmit =async(req,res) =>{
+  const handleSubmit = () =>{
 
 
-    /// get data by id and date for checking wether it is in database or not
-
-  //   let URL1="http://localhost:5000/api/v1/getMealInfoByDateAndId";
-
-  //   const postbody={
-  //     memberId:id,
-  //     date: day
-
-        
-  //   }
-   
-
-  //  const {data }= await axios.get(URL1,postbody)
-
-  //  console.log(data)
-
-   
-  // if(!data){
-    
     const meal = mealRef.value;
     const balance = balanceRef.value;
- 
     let URL="http://localhost:5000/api/v1/regularMeal";
 
     const postBody={
-      memberId:id,
+      _id:id,
       meal:meal,
       balance:balance,
-      date:day
-
         
     }
- 
+   console.log(id)
 
-   await axios.post(URL,postBody).then((res)=>{      
-              if(res.data.MealControl){  
-          
-              
-                toast.success('Successfully submitted')                      
+    axios.post(URL,postBody).then((res)=>{      
+              if(res.status===200){    
+                toast.success('successfully submit')                     
               }
  
           })
    
 
-  // }else{
-  //   toast.error('you cannot set data twice in a day') 
 
-  // }
-
-   
     setShow(false);
 
   } 
 
+   
 const onDelete=(id)=>{
   SweetAlert(id).then((res)=>{
 

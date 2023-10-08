@@ -69,6 +69,14 @@ const RegularCost = () => {
             if(res.status===200){
                
                 toast.success("successfully submitted");
+
+       /// get the all cost again from the server         
+      let urL="http://localhost:5000/api/v1/getMealCostDetail";
+
+      axios.get(urL).then((res)=>{
+        setDailyCost(res.data.data)
+      })
+
                 
             }else{
 

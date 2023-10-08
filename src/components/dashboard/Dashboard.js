@@ -6,6 +6,7 @@ import CircularProgress from '../../helper/CircularProgress';
 import { getMemberDetails } from '../../helper/SessionHelper';
 import { useSelector } from 'react-redux';
 import store from '../../redux/store';
+import toast from 'react-hot-toast';
 
 
 const Dashboard = () => {
@@ -22,12 +23,24 @@ const Dashboard = () => {
 useEffect(()=>{
 
 
+    ///get the total cost that is made in daily market
+
 let urL="http://localhost:5000/api/v1/getMealCostDetail";
 
 axios.get(urL).then((res)=>{
-    
+
+if(res.data.status===400){
+    toast.error('No market')
+}else{
     SetTotalCost(res.data.totalCost)
+
+}
+         
+    
 })
+
+
+/// get the all data about totalMeal,total cost ,total exist balance,mealRate
   
     let URL=`http://localhost:5000/api/v1/mealRate/${grantTotalCost}`
 
