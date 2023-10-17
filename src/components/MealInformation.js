@@ -27,7 +27,7 @@ const MealInformation = () => {
 
     },[])
 
-    //console.log(MealInformation)
+
 
 
 
@@ -35,7 +35,7 @@ const MealInformation = () => {
 
     return (
         <div>
-            <h1>this is meal information</h1>
+            <h2 >meal <span className='HeadingName'>information</span></h2>
             
 
             <Table striped bordered hover size="sm" className='p-5'>
@@ -57,8 +57,8 @@ const MealInformation = () => {
                 <td>{data.name}</td>
                 <td>{data.email}</td>
                 <td>{data?.totalMeal}</td>
-                <td>{data?.totalBalance}</td>
-                <td>{data?.ExistBalance}</td>
+                <td>{data?.totalBalance.toFixed(2)}</td>
+                <td>{data?.ExistBalance.toFixed(2)}</td>
               </tr>
 
              

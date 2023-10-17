@@ -5,6 +5,8 @@ import { Button, Modal, Table } from 'react-bootstrap';
 import { SweetAlert } from '../helper/SweetAlert';
 import { IsAdmin } from '../helper/SessionHelper';
 import toast from 'react-hot-toast';
+import { AiOutlineDelete } from "react-icons/ai";
+
 
 
 
@@ -22,10 +24,6 @@ const AllMember = (props) => {
  const [id,setId] = useState([])
   const [show, setShow] = useState(false);
   const [admin,setAdmin] = useState(0);
- 
-
-
-
 
   let mealRef,balanceRef = useRef();
 
@@ -46,12 +44,13 @@ const AllMember = (props) => {
     let URL="http://localhost:5000/api/v1/regularMeal";
 
     const postBody={
-      _id:id,
+      _id:id.id,
+      email:id.email,
       meal:meal,
       balance:balance,
         
     }
-   console.log(id)
+  
 
     axios.post(URL,postBody).then((res)=>{      
               if(res.status===200){    
@@ -83,10 +82,16 @@ const onDelete=(id)=>{
 
 
   const handleShow = (id) => {
-
     setId(id)
     setShow(true);
   }
+  const EditHandleShow= (id) => {
+
+     
+
+
+  }
+
   
 
   
@@ -95,6 +100,12 @@ const onDelete=(id)=>{
     
       getData();
       setAdmin(IsAdmin())
+
+   
+
+
+
+    
       
     },[])
 
@@ -129,7 +140,7 @@ const onDelete=(id)=>{
   
     return (
         <div>
-            <h1>All the members</h1>
+            <h2>All the <span className='HeadingName'>members</span></h2>
             
             <Table striped bordered hover>
             <thead>
@@ -142,10 +153,20 @@ const onDelete=(id)=>{
       { 
        admin  ? <th scope="col">setMeal</th> : ""
      }
+      { 
+       admin  ? <th scope="col">Edit Meal</th> : ""
+     }
+
+   
 
       {
 
       admin  ?  <th className="text-danger" scope="col "> Action</th>  : <h1></h1>
+      
+      }
+      {
+
+      admin  ?  <th className="text-danger" scope="col ">Send Email</th>  : <h1></h1>
       
       }
     </tr>
@@ -162,16 +183,25 @@ const onDelete=(id)=>{
                         <td>{member.name}</td>
                         <td>{member.email}</td>
                         <td>{member.mobile}</td>
+                       
                         
                        { 
-                           admin  ?  <td className='m-2'> <div><Button className='text-dark btn btn-info mx-2' variant="primary" onClick={()=>handleShow(member._id)}>set </Button> 
+                           admin  ?  <td className='m-2'> <div><Button className='text-dark btn btn-info mx-2' variant="primary" onClick={()=>handleShow({id:member._id,email:member.email})}>set </Button> 
                            
                            </div>  </td> : <h1></h1>
                        }
-                        
-                        
-                       
-                 
+
+                        {
+
+                          admin  ?  <td>  
+                      
+                      <div><Button className='text-dark btn btn-info mx-2' variant="primary" onClick={()=>EditHandleShow(member._id)}>Update </Button></div>
+                         </td>  : <h1></h1>
+
+
+                        }
+
+                                        
                  {
 
                    admin  ?  <td><Button onClick= {()=>onDelete(member._id)} className="text-dark">Delete</Button></td>  : <h1></h1>
@@ -179,6 +209,16 @@ const onDelete=(id)=>{
 
                  }
 
+               {
+
+               admin  ?  <td>  
+
+             <div><h1 className='text-dark btn btn-info mx-2' variant="primary" onClick={()=>EditHandleShow(member._id)}>sendEmail </h1></div>
+              </td>  : <h1></h1>
+
+
+}
+             
 
 
                         
@@ -196,10 +236,11 @@ const onDelete=(id)=>{
 
             <>
 
-           
 
-   
+            <>
 
+  
+    </>
 
 <Modal show={show} onHide={handleClose}>
     <Modal.Header closeButton>

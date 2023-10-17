@@ -4,8 +4,6 @@ import Calendar from 'react-calendar';
 
 import CircularProgress from '../../helper/CircularProgress';
 import { getMemberDetails } from '../../helper/SessionHelper';
-import { useSelector } from 'react-redux';
-import store from '../../redux/store';
 import toast from 'react-hot-toast';
 
 
@@ -17,15 +15,14 @@ const Dashboard = () => {
     const [MemberTotalMeal,setMemberTotalMeal ] = useState(0);
     const memberDetail= getMemberDetails();
 
-//    console.log(meal)
-//    console.log(balance)
+
 
 useEffect(()=>{
 
 
     ///get the total cost that is made in daily market
 
-let urL="http://localhost:5000/api/v1/getMealCostDetail";
+let urL="http://localhost:5000/api/v1/MarketTotalCost";
 
 axios.get(urL).then((res)=>{
 
@@ -38,6 +35,8 @@ if(res.data.status===400){
          
     
 })
+
+
 
 
 /// get the all data about totalMeal,total cost ,total exist balance,mealRate
@@ -74,7 +73,7 @@ if(res.data.status===400){
 
     return (
         <div class='container'>
-              <h1>Dashboard</h1>
+              <h2 className='p-3'><span className='HeadingName'>Smart Meal </span> Management System</h2>
             <div className="row my-3">
                
                 <div class='col-lg-4 col-md-6 col-sm-12 d-flex justify-content-center align-items-center bg'>

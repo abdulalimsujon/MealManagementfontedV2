@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { Table } from 'react-bootstrap';
 import toast from 'react-hot-toast';
+import { IsAdmin, getMemberDetails } from '../helper/SessionHelper';
 
 const RegularCost = () => {
     
@@ -10,15 +11,26 @@ const RegularCost = () => {
     const [fields, setFields] = useState([{  }]);
 
    const [dailyCost,setDailyCost] = useState([])
-   const [active,setActive] = useState(0)
+   const [admin,setAdmin] = useState(0)
 
-     console.log(active)
+   
+
+   
+
+   let dateObj = new Date();
+   let month = dateObj.getUTCMonth() + 1; //months from 1-12
+   let day = dateObj.getUTCDate();
+   let year = dateObj.getUTCFullYear();
+   
+  let  newdate = year + "/" + month + "/" + day;
 
 
 
     useEffect(()=>{
+      const member = getMemberDetails();
+      setAdmin(IsAdmin(member._id))
 
-
+      
       let urL="http://localhost:5000/api/v1/getMealCostDetail";
 
           axios.get(urL).then((res)=>{
@@ -28,7 +40,7 @@ const RegularCost = () => {
 },[])
 
 
-    console.log("###",fields)
+   // console.log("###",fields)
 
   const handleAddField = () => {
     setFields([...fields, {  }]);
@@ -51,11 +63,6 @@ const RegularCost = () => {
 
   };
    
-
-    
-
-  
-
   const handleSubmit = (e) => {
     e.preventDefault();
     // Handle form submission here (e.g., send data to the server)
@@ -90,37 +97,51 @@ const RegularCost = () => {
 
   
   };
+
+ 
+
     return (
         <div>
-           <h4 className='text-center p-3'>Market list</h4>
-         
-    <h3 className='p-3'>Add Regular Market</h3>
-       <form onSubmit={handleSubmit} className='table_style'>
+   
 
-        {fields.map((field, index) => (
-          <div key={index}>
-            <input
-              type="text"
-              placeholder="product"
-              value={field.name}
-              onChange={(e) => handleFieldChange(index, 'name', e.target.value)}
-            />
-            <input
-              type="text"
-              placeholder="cost"
-              value={field.value}
-              onChange={(e) => handleFieldChange(index, 'value', e.target.value)}
-            />
-            <button type="button" onClick={() => handleRemoveField(index)}>
-              Remove
-            </button>
-          </div>
-        ))}
-        <button type="button" onClick={handleAddField}>
-          Add Field
-        </button>
-        <button onClick={()=>setActive(1)}  type="submit">Submit</button>
-      </form>
+
+          {
+            admin ? <div>
+      
+            <h3 className='p-3'>Add Regular Market <span class = "HeadingName">{newdate}</span></h3>
+               <form onSubmit={handleSubmit} className='table_style'>
+        
+                {fields.map((field, index) => (
+                  <div className='mb-3' key={index}>
+                    <input
+                      type="text"
+                      placeholder="product"
+                      value={field.name}
+                      onChange={(e) => handleFieldChange(index, 'name', e.target.value)}
+                    />
+                    <input
+                      type="text"
+                      placeholder="cost"
+                      value={field.value}
+                      onChange={(e) => handleFieldChange(index, 'value', e.target.value)}
+                    />
+                    <button type="button" onClick={() => handleRemoveField(index)}>
+                      Remove
+                    </button>
+                  </div>
+                ))}
+                <button type="button" onClick={handleAddField}>
+                  Add Field
+                </button>
+                <button   type="submit">Submit</button>
+              </form>
+        
+              </div>  
+               :   " "
+          }
+     
+
+       
 
       {
        
@@ -128,7 +149,7 @@ const RegularCost = () => {
 
 <div className="card " style={{width: 700}}>
   <div class="card-body">
-  <h5 class="card-title">Today Market</h5>
+  <h5 class="card-title">Today Market {}</h5>
       <table class='table'>
       <thead>
     <tr>

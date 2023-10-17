@@ -1,6 +1,6 @@
 import { Container, Navbar } from "react-bootstrap";
 import { NavLink } from 'react-router-dom';
-import {AiOutlineCheckCircle, AiOutlineEdit, AiOutlineLogout, AiOutlineMenuUnfold, AiOutlineUser} from "react-icons/ai";
+import { AiOutlineLogout, AiOutlineMenuUnfold, AiOutlineUser} from "react-icons/ai";
 
 import {CiSearch,CiDatabase} from "react-icons/ci";
 import {SiDailymotion} from "react-icons/si";

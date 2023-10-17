@@ -52,6 +52,40 @@ a:hover {
   background-color:rgb(200, 210, 219);
 }
 
+/* search */
+
+.searchTable{
+  
+  padding-top: 50px;
+  padding-left: 250px;
+  padding-right: 250px;
+}
+.searchTable {
+  border:1px soild black;
+
+}
+.searchTable h3{
+  padding:20px;
+}
+.searchTable tbody{
+  margin: 1px solid black;
+}
+.searchHeading{
+  margin-top: 20px;
+}
+.HeadingName{
+  color:rgb(236, 106, 25);
+}
+.search{
+  display: flex;
+justify-content: center;
+}
+
+
+
+  /* regularCost */
+
+  
 @import "sidebar.css";
 
 @import "dropdownmenu.css";

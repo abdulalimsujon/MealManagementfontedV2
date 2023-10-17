@@ -6,11 +6,11 @@ const CircularProgress = (props) => {
   
 const pp =props.rate;
   return (
-    <div style={{ width: 150, height: 150 }}>
+    <div style={{ width: 200, height: 200 }}>
       
       <CircularProgressbar
   value={pp}
-  text={`${pp}%`}
+  text={`meal Rate ${pp}%`}
   styles={{
     // Customize the root svg element
     root: {},
@@ -39,13 +39,13 @@ const pp =props.rate;
     // Customize the text
     text: {
       // Text color
-      fill: '#BC2CD2',
+      fill: '	#F28C28',
       // Text size
-      fontSize: '5px',
+      fontSize: '8px',
     },
     // Customize background - only used when the `background` prop is true
     background: {
-      fill: '##781787',
+      fill: '#F28C28',
     },
   }}
 />;
