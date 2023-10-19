@@ -57,8 +57,8 @@ const MealInformation = () => {
                 <td>{data.name}</td>
                 <td>{data.email}</td>
                 <td>{data?.totalMeal}</td>
-                <td>{data?.totalBalance.toFixed(2)}</td>
-                <td>{data?.ExistBalance.toFixed(2)}</td>
+                <td>{data?.totalBalance?.toFixed(2)}</td>
+                <td>{data?.ExistBalance?.toFixed(2)}</td>
               </tr>
 
              

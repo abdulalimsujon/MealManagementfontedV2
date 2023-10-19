@@ -34,13 +34,18 @@ const RegularCost = () => {
       let urL="http://localhost:5000/api/v1/getMealCostDetail";
 
           axios.get(urL).then((res)=>{
-            setDailyCost(res.data.data)
+
+            
+            if(res.status===200){
+              setDailyCost(res.data.data)
+
+            }
+          
           })
    
 },[])
 
 
-   // console.log("###",fields)
 
   const handleAddField = () => {
     setFields([...fields, {  }]);
@@ -66,36 +71,55 @@ const RegularCost = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     // Handle form submission here (e.g., send data to the server)
-    console.log('Form data:', fields.length);
+    //console.log('Form data:', fields.length);
 
-    let URL="http://localhost:5000/api/v1/mealCostDetail";
+    let flag = 0;
 
-  axios.post(URL,{fields}).then((res)=>{
-            
+    for (let i in fields){
+      if(!fields[i].value){
+
+        flag= 1;
           
-            if(res.status===200){
-               
-                toast.success("successfully submitted");
+      }
+    }
+ 
+    if(flag){
 
-       /// get the all cost again from the server         
-      let urL="http://localhost:5000/api/v1/getMealCostDetail";
+      toast.error('Empty value doesnot accept')
 
-      axios.get(urL).then((res)=>{
-        setDailyCost(res.data.data)
-      })
 
+
+    }else{
+      let URL="http://localhost:5000/api/v1/mealCostDetail";
+
+      axios.post(URL,{fields}).then((res)=>{
                 
-            }else{
-
-              toast.error("something went wrong");
-
-            }
-
-            
+              
+                if(res.status===200){
+                   
+                    toast.success("successfully submitted");
+    
+           /// get the all cost again from the server         
+          let urL="http://localhost:5000/api/v1/getMealCostDetail";
+    
+          axios.get(urL).then((res)=>{
+            setDailyCost(res.data.data)
+          })
+    
+                    
+                }else{
+    
+                  toast.error("something went wrong");
+    
+                }
+    
+                
+          
+            })
+    
       
-        })
-
-  
+    }
+   
   };
 
  
