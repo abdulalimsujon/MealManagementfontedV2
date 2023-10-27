@@ -8,7 +8,7 @@ import toast from 'react-hot-toast';
 
 
 
-const AllMember = (props) => {
+const AllMember = () => {
   
 
   const date = new Date();
@@ -18,7 +18,9 @@ const AllMember = (props) => {
   
 
 
- const [value,setValue] = useState([])
+ const [value,setValue] = useState([]) 
+ const [meal,setMeal] = useState([])
+ const [value1,setValue1] = useState(null)
   const [show, setShow] = useState(false);
   const [admin,setAdmin] = useState(0);
   const [members,Setmembers] = useState([])
@@ -30,7 +32,7 @@ const AllMember = (props) => {
   
 
 
-  let mealRef,balanceRef = useRef();
+  let  editmealRef,editbalanceRef, mealRef,balanceRef = useRef();
 
 
   const handleClose = () =>{
@@ -71,6 +73,38 @@ const AllMember = (props) => {
 
   } 
 
+ const  handleSubmitmodal2 = ()=>{
+
+
+  // update meal
+
+  const meal = editmealRef.value;
+  const balance = editbalanceRef.value;
+  let URL1=`http://localhost:5000/api/v1/updateMeal/${value1}`
+
+  const postBody={
+        meal,
+        balance
+      
+  }
+
+
+  axios.post(URL1,postBody).then((res)=>{      
+            if(res.status===200){  
+
+              toast.success('successfully Updated data')                     
+            }
+
+        })
+
+
+        setShowModal2(false) ;
+         
+
+ }
+
+                                                            
+
    
 const onDelete=(id)=>{
   SweetAlert(id).then((res)=>{
@@ -92,12 +126,32 @@ const onDelete=(id)=>{
     setShow(true);
   }
 
-  const handleShowModal2= (id) => {
-    setShowModal2(true);
+  
 
-     console.log(id)
+  const handleShowModal2= async(id) => {
+
+    setValue1(id);
+
+   
+
+        // get meal
+
+  let URL=`http://localhost:5000/api/v1/getMeal/${id}`
 
 
+  await axios.get(URL).then((res)=>{      
+             if(res.status===200){  
+              
+             
+               setMeal(res.data.data);
+
+               setShowModal2(true);
+
+              
+                            
+             }
+ 
+         })
   }
 
   
@@ -110,13 +164,11 @@ const onDelete=(id)=>{
       setAdmin(IsAdmin())
 
    
-
-
-
-    
       
     },[])
 
+
+  
     
 
 
@@ -142,9 +194,6 @@ const onDelete=(id)=>{
       
     }
   
-   
- 
-
   
     return (
         <div>
@@ -243,7 +292,7 @@ const onDelete=(id)=>{
   
     </>
 
-     
+
 
 <Modal show={show} onHide={handleClose}>
     <Modal.Header closeButton>
@@ -255,11 +304,11 @@ const onDelete=(id)=>{
                                 <br/>
                                 <input ref={(input)=>mealRef=input} placeholder='Regular Meal' type='email' className='form-control animated fadeInUp'></input>
                                 <br/>
-                                <input ref={(input)=>balanceRef=input} placeholder='Balance' type='password' className='form-control animated fadeInUp'></input>
+                                <input ref={(input)=>balanceRef=input} placeholder='Balance' type='number' className='form-control animated fadeInUp'></input>
                                 <br/>
                         
                 </div>
-            </div>
+       </div>
 
 
     </Modal.Body>
@@ -277,15 +326,32 @@ const onDelete=(id)=>{
 
     <Modal show={showModal2} onHide={handleCloseModal2}>
     <Modal.Header closeButton>
-          <Modal.Title>Modal heading</Modal.Title>
+          <Modal.Title>Updating Meal</Modal.Title>
         </Modal.Header>
-        <Modal.Body>Woohoo, you are reading this text in a modal!</Modal.Body>
+        <Modal.Body>
+        <div className="container">
+                <div className="row justify-content-center">                         
+                                <br/>
+                                <label>meal</label>
+                                <input ref={(input)=>editmealRef=input} defaultValue={meal.meal} type='email' className='form-control animated fadeInUp'></input>
+                                <br/>
+                                <label>balance</label>
+                                <input ref={(input)=>editbalanceRef=input} defaultValue={meal.balance}  type='number' className='form-control animated fadeInUp'></input>
+                                <br/>
+                        
+                </div>
+       </div>
+
+
+
+
+        </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleCloseModal2}>
             Close
           </Button>
-          <Button variant="primary" onClick={handleCloseModal2}>
-            Save Changes
+          <Button variant="primary" onClick={handleSubmitmodal2}>
+            update
           </Button>
         </Modal.Footer>
       </Modal>      

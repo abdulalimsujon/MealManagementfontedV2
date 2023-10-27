@@ -39,7 +39,7 @@ const MasterLayout = (props) => {
     },[])
 
 
-    console.log(profileData)
+    //console.log(profileData)
 
 
     const MenuBarClickHandler = () => {
