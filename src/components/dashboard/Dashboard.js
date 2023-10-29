@@ -74,6 +74,8 @@ if(res.data.status===400){
     return (
         <div class='container'>
               <h2 className='p-3'><span className='HeadingName'>Smart Meal </span> Management System</h2>
+               
+               
             <div className="row my-3">
                
                 <div class='col-lg-4 col-md-6 col-sm-12 d-flex justify-content-center align-items-center bg'>
@@ -85,10 +87,10 @@ if(res.data.status===400){
 
                 <div className="col-lg-4 col-md-6 col-sm-12 d-flex justify-content-center align-items-center bg">
                 <ul className='ml-3' style={{ listStyleType: 'square' }}>
-                <li>Grant Total Balance :{mealData.grandBalace}</li>
-                <li>Meal Rate :{mealData.milRate}</li>
-                <li>Grand Meal :{mealData.totalMeal}</li>
-                <li>Grand Exist Balance :{mealData.grantExistBalance}</li>
+                <li><h5>Grant Total Balance :{mealData.grandBalace}</h5>  </li>
+                <li><h5>Meal Rate :{mealData.milRate}</h5></li>
+                <li><h5>Grand Meal :{mealData.totalMeal}</h5></li>
+                <li><h5>Grand Exist Balance :{mealData.grantExistBalance}</h5></li>
                 </ul>
 
            

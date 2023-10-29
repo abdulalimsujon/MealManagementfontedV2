@@ -6,11 +6,12 @@ import toast from 'react-hot-toast';
 
 const Search = () => {
 
-
     const [Info,setInfo] = useState([])
-    
+
+
 
     const submit=async(e)=>{
+
         e.preventDefault();
         const phone = e.target.number.value;
       
@@ -31,7 +32,7 @@ const Search = () => {
        
     }
 
-
+//console.log(Info)
 
     return (
 

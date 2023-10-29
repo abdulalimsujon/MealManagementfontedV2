@@ -1,8 +1,11 @@
 import { Container, Navbar } from "react-bootstrap";
 import { NavLink } from 'react-router-dom';
 import { AiOutlineLogout, AiOutlineMenuUnfold, AiOutlineUser} from "react-icons/ai";
+import { FaUsers  } from "react-icons/fa6";
+import { TbFileDatabase } from "react-icons/tb";
 
-import {CiSearch,CiDatabase} from "react-icons/ci";
+
+import {CiSearch} from "react-icons/ci";
 import {SiDailymotion} from "react-icons/si";
 import React, { Fragment, useEffect, useRef, useState } from 'react';
 import { getMemberDetails, removeSession } from "../helper/SessionHelper";
@@ -115,7 +118,7 @@ const MasterLayout = (props) => {
 </NavLink>
 
 <NavLink className={(navData) => navData.isActive ? "side-bar-item-active side-bar-item mt-2" : "side-bar-item mt-2" } to="/allMemberPage" >
-    <CiDatabase className="side-bar-item-icon" />
+    <FaUsers className="side-bar-item-icon" />
     <span className="side-bar-item-caption">All Members</span>
 </NavLink>
 
@@ -126,7 +129,7 @@ const MasterLayout = (props) => {
 
 
 <NavLink className={(navData) => navData.isActive ? "side-bar-item-active side-bar-item mt-2" : "side-bar-item mt-2" } to="/mealInformation" >
-    <SiDailymotion className="side-bar-item-icon" />
+    <TbFileDatabase className="side-bar-item-icon" />
     <span className="side-bar-item-caption">Meal Information</span>
 </NavLink>
 <NavLink className={(navData) => navData.isActive ? "side-bar-item-active side-bar-item mt-2" : "side-bar-item mt-2" } to="/regularCost" >

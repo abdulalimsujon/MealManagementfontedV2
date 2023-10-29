@@ -5,6 +5,7 @@ import { Button, Modal, Table } from 'react-bootstrap';
 import { SweetAlert } from '../helper/SweetAlert';
 import { IsAdmin } from '../helper/SessionHelper';
 import toast from 'react-hot-toast';
+import { FaRegEnvelope  } from "react-icons/fa6";
 
 
 
@@ -41,6 +42,8 @@ const AllMember = () => {
 
   } 
   
+
+
 
 
   const handleSubmit = () =>{
@@ -154,9 +157,9 @@ const onDelete=(id)=>{
          })
   }
 
-  
+/// send email 
 
-  
+
   
     useEffect(()=>{
     
@@ -221,6 +224,7 @@ const onDelete=(id)=>{
       admin  ?  <th className="text-danger" scope="col "> Action</th>  : <h1></h1>
       
       }
+      
     </tr>
   </thead>
 
@@ -253,7 +257,7 @@ const onDelete=(id)=>{
                           admin  ?  <td>  
                       
                       <>
-                      <Button   className='text-dark btn btn-info mx-2' variant="primary"  onClick={()=>handleShowModal2(member._id)}>
+                      <Button   className='text-dark btn btn-info mx-2' variant="primary"  onClick={()=>handleShowModal2(member?._id)}>
                               update
                              </Button>
 
@@ -265,12 +269,14 @@ const onDelete=(id)=>{
                         }
 
                                         
+                    
                        {
+                       
+                       
+                       admin  ?  <td><Button onClick= {()=>onDelete(member._id)} className="text-dark">Delete</Button></td>  : <h1></h1>
 
-                         admin  ?  <td><Button onClick= {()=>onDelete(member._id)} className="text-dark">Delete</Button></td>  : <h1></h1>
 
-
-                        }
+}
                         
                       </tr>                       
                       
@@ -333,10 +339,10 @@ const onDelete=(id)=>{
                 <div className="row justify-content-center">                         
                                 <br/>
                                 <label>meal</label>
-                                <input ref={(input)=>editmealRef=input} defaultValue={meal.meal} type='email' className='form-control animated fadeInUp'></input>
+                                <input ref={(input)=>editmealRef=input} defaultValue={meal?.meal} type='email' className='form-control animated fadeInUp'></input>
                                 <br/>
                                 <label>balance</label>
-                                <input ref={(input)=>editbalanceRef=input} defaultValue={meal.balance}  type='number' className='form-control animated fadeInUp'></input>
+                                <input ref={(input)=>editbalanceRef=input} defaultValue={meal?.balance}  type='number' className='form-control animated fadeInUp'></input>
                                 <br/>
                         
                 </div>
