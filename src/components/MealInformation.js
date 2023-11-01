@@ -37,7 +37,7 @@ const MealInformation = () => {
 
     await   axios.get(URL1).then((res)=>{
           
-         if(res.status==="success"){
+         if(res.status===200){
           toast.success("notify email send successfully")
          }else{
           toast.error("notify email send failed")
