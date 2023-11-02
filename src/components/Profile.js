@@ -107,55 +107,53 @@ const updateMyProfile =()=>{
 }
 
     return (
-      <div className='d-flex justify-content-center align-items-center'>
-         <Card>
+      <div className="container">
+          <div className="d-flex justify-content-center mt-5">
+           <Card style={{ width: '18rem' }}>
 
-          <div className='d-flex justify-content-center align-items-center'>
+           <div className='d-flex justify-content-center align-items-center'>
             
-         <img className='icon-nav-img-lg pl-3' src={profileData.photo}></img>
-          </div>
-   
-      <Card.Body>
-        <Card.Title>User Profile</Card.Title>
-        
-        <input onChange ={previewImage} ref={(input)=>ImageRef=input}className = "form-control  animated fadeInUp"  type="file"  />
-
-             
-
-             <div className=" mt-2">
-
-              <input key={Date.now()} readOnly={true} defaultValue = {profileData.email}ref={(input)=>emailRef=input}className = "form-control  animated fadeInUp"  type="email"  />
-
-             </div>
-             <div className=" mt-2">
-
-              <input key={Date.now()}  defaultValue = {profileData.address} ref={(input)=>addressRef=input} className = "form-control  animated fadeInUp"  type="email"  />
-
-             </div>
-
-             <div className=" mt-2">
-
-              <input key={Date.now()}  defaultValue = {profileData.name}ref={(input)=>NameRef=input}className = "form-control  animated fadeInUp"  type="text"  />
-
+            <img className='icon-nav-img-lg pl-3' src={profileData.photo}></img>
              </div>
           
-             <div className=" mt-2">
+            < input onChange ={previewImage} ref={(input)=>ImageRef=input}className = "form-control  animated fadeInUp"  type="file"  />
 
-              <input key={Date.now()}  defaultValue = {profileData.mobile}ref={(input)=>mobileNumRef=input}className = "form-control  animated fadeInUp"  type="text"  />
+           
 
-             </div>
-             
+                 <div className=" mt-2">
+
+                   <input key={Date.now()} readOnly={true} defaultValue = {profileData.email}ref={(input)=>emailRef=input}className = "form-control  animated fadeInUp"  type="email"  />
+
+                  </div>
+                 <div className=" mt-2">
+
+                   <input key={Date.now()}  defaultValue = {profileData.address} ref={(input)=>addressRef=input} className = "form-control  animated fadeInUp"  type="email"  />
+
+                     </div>
+
+                   <div className=" mt-2">
+
+                  <input key={Date.now()}  defaultValue = {profileData.name}ref={(input)=>NameRef=input}className = "form-control  animated fadeInUp"  type="text"  />
+
+                 </div>
+
+                  <div className=" mt-2">
+
+                   <input key={Date.now()}  defaultValue = {profileData.mobile}ref={(input)=>mobileNumRef=input}className = "form-control  animated fadeInUp"  type="text"  />
+
+                  </div>
 
 
-      
-       <div className="mt-2">
 
-              <button onClick={updateMyProfile} className='btn btn-primary float-end  animated fadeInUp w-100'>Update</button>
 
-             </div>
-      </Card.Body>
-    </Card>
+<div className="mt-2">
+
+<button onClick={updateMyProfile} className='btn btn-primary float-end  animated fadeInUp w-100'>Update</button>
+
+</div>
+        </Card>
       </div>
+  </div>
      
     );
 };

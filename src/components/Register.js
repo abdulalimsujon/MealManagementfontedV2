@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, { useRef } from 'react';
+import { Card } from 'react-bootstrap';
 import toast from 'react-hot-toast';
 import { Link, useNavigate } from "react-router-dom"
 
@@ -50,22 +51,12 @@ const Register = () => {
    
     return (
         
-
-<div className="container">
-<div className="row justify-content-center ">
-    <div className="col-md-7 col-lg-6 ">
-
-        <div className="card animated fadeIn w-100">
-
-            <div className="card-body">
-                <h4 className='text-center'>Sign Up</h4>
-
-                <hr/>
-
-                <div className="container-fluid m-0 p-0">
-                    <div className="row  p-0">
-
-                    <label>Name</label>
+        <div className="container">
+        <div className="d-flex justify-content-center mt-5">
+          <Card style={{ width: '18rem' }}>
+            <Card.Body>
+                <h4>Sign Up</h4>
+            <label>Name</label>
                         <input ref={(input)=>nameRef=input} className="form-control animated fadeInUp" type="text"></input>
                         <hr/>
                         
@@ -90,23 +81,11 @@ const Register = () => {
                       
                         <div className="text-center w-100">
                         <Link onClick={navigate('/')} className='text-center animated fadeInUp' >Login</Link>
-                      
-
-
-                    </div>
-                       
-
-                    </div>
-
-                </div>
-            </div>
-
+                        </div>
+            </Card.Body>
+          </Card>
         </div>
-
-    </div>
-</div>
-
-</div>
+      </div>
     
 )};
 

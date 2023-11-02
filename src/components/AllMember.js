@@ -273,7 +273,7 @@ const onDelete=(id)=>{
                        {
                        
                        
-                       admin  ?  <td><Button onClick= {()=>onDelete(member._id)} className="text-dark">Delete</Button></td>  : <h1></h1>
+                       admin  ?  <td><Button className='text-dark btn btn-info mx-2' onClick= {()=>onDelete(member._id)} >Delete</Button></td>  : <h1></h1>
 
 
 }
@@ -297,7 +297,6 @@ const onDelete=(id)=>{
 
   
     </>
-
 
 
 <Modal show={show} onHide={handleClose}>
@@ -353,10 +352,10 @@ const onDelete=(id)=>{
 
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={handleCloseModal2}>
+          <Button className='text-dark btn btn-info mx-2' onClick={handleCloseModal2}>
             Close
           </Button>
-          <Button variant="primary" onClick={handleSubmitmodal2}>
+          <Button className='text-dark btn btn-info mx-2' onClick={handleSubmitmodal2}>
             update
           </Button>
         </Modal.Footer>

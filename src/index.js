@@ -2,7 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import "../src/Assests/css/bootstrap.css"
-import "../src/Assests/css/animate.min.css"
 import "../src/Assests/css/style.css"
 import App from './App';
 import reportWebVitals from './reportWebVitals';
